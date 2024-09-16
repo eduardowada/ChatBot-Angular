@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { QuestionComponent } from '../../icons/question/question.component';
 import { CommonModule } from '@angular/common';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { QuestionComponent } from '../../icons/question/question.component';
 import { CuriosityComponent } from '../../icons/curiosity/curiosity.component';
 import { HistoryComponent } from '../../icons/history/history.component';
 
@@ -17,22 +17,24 @@ import { HistoryComponent } from '../../icons/history/history.component';
   styleUrl: './chat-suggestions.component.scss'
 })
 export class ChatSuggestionsComponent {
+  @Output() questionSelected =  new EventEmitter<string>();
+
   suggestionTopics = [
     {
       title: "Dúvidas",
       icon: 'doubt',
       questions: [
         "Qual o valor para entrar no museu?",
-        "Quando o museu está aberto?"
+        "Quando o museu está aberto?",
       ]
     },
     {
-      title: "Curiosidade",
+      title: "Curiosidades",
       icon: 'curiosity',
       questions: [
         "Quem era o prefeito na época da criação?",
         "Quantos cômodos existem no museu?",
-        "Quantos peças estão exibidas no museu?",
+        "Quantas peças estão exibidas no museu?",
       ]
     },
     {
@@ -41,8 +43,12 @@ export class ChatSuggestionsComponent {
       questions: [
         "Quando o museu foi criado?",
         "Qual o estilo arquitetônico do prédio?",
-        "Quantas peças estão exibidas no museu?"
+        "Quem foi o arquiteto do prédio?",
       ]
     },
   ]
+
+  selectQuestion(value: string){
+    this.questionSelected.emit(value)
+  }
 }
